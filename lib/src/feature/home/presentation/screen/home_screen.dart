@@ -156,32 +156,38 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                     itemCount: provider
                                         .getSelectedProductList()
                                         .length,
-                                    itemBuilder: (context, index) =>
-                                        ProductCardWidget(
-                                      enableAddToCart:
-                                          provider.selectedCatory !=
-                                              CategoryEnum.cart,
-                                      title: provider
-                                          .getSelectedProductList()[index]
-                                          .title,
-                                      image: provider
-                                          .getSelectedProductList()[index]
-                                          .image,
-                                      price: provider
-                                          .getSelectedProductList()[index]
-                                          .price
-                                          ?.toString(),
-                                      rating: provider
-                                          .getSelectedProductList()[index]
-                                          .rating
-                                          ?.rate
-                                          ?.toString(),
-                                      addToCart: () {
-                                        provider.updateCart(provider
-                                            .getSelectedProductList()[index]);
-                                        showSnackBar();
-                                      },
-                                    ),
+                                    itemBuilder: (context, index) => provider
+                                                .selectedCatory !=
+                                            provider
+                                                .getSelectedProductList()[index]
+                                                .categoryEnum
+                                        ? SizedBox()
+                                        : ProductCardWidget(
+                                            enableAddToCart:
+                                                provider.selectedCatory !=
+                                                    CategoryEnum.cart,
+                                            title: provider
+                                                .getSelectedProductList()[index]
+                                                .title,
+                                            image: provider
+                                                .getSelectedProductList()[index]
+                                                .image,
+                                            price: provider
+                                                .getSelectedProductList()[index]
+                                                .price
+                                                ?.toString(),
+                                            rating: provider
+                                                .getSelectedProductList()[index]
+                                                .rating
+                                                ?.rate
+                                                ?.toString(),
+                                            addToCart: () {
+                                              provider.updateCart(provider
+                                                      .getSelectedProductList()[
+                                                  index]);
+                                              showSnackBar();
+                                            },
+                                          ),
                                   ),
                                 ),
                                 if (provider.showTotalPrice)

@@ -156,7 +156,7 @@ class _$HomeStateImpl implements _HomeState {
   const _$HomeStateImpl(
       {this.selectedCatory = null,
       this.productListLoading = false,
-      this.sideBarWidth = 10.0,
+      this.sideBarWidth = 50,
       final List<ProductListResponseModel> productList = const [],
       final List<ProductListResponseModel> cartItems = const []})
       : _productList = productList,
