@@ -17,6 +17,11 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$HomeState {
   CategoryEnum? get selectedCatory => throw _privateConstructorUsedError;
+  bool get productListLoading => throw _privateConstructorUsedError;
+  List<ProductListResponseModel> get productList =>
+      throw _privateConstructorUsedError;
+  List<ProductListResponseModel> get cartItems =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
@@ -30,7 +35,11 @@ abstract class $HomeStateCopyWith<$Res> {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
       _$HomeStateCopyWithImpl<$Res, HomeState>;
   @useResult
-  $Res call({CategoryEnum? selectedCatory});
+  $Res call(
+      {CategoryEnum? selectedCatory,
+      bool productListLoading,
+      List<ProductListResponseModel> productList,
+      List<ProductListResponseModel> cartItems});
 }
 
 /// @nodoc
@@ -49,12 +58,27 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
   @override
   $Res call({
     Object? selectedCatory = freezed,
+    Object? productListLoading = null,
+    Object? productList = null,
+    Object? cartItems = null,
   }) {
     return _then(_value.copyWith(
       selectedCatory: freezed == selectedCatory
           ? _value.selectedCatory
           : selectedCatory // ignore: cast_nullable_to_non_nullable
               as CategoryEnum?,
+      productListLoading: null == productListLoading
+          ? _value.productListLoading
+          : productListLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      productList: null == productList
+          ? _value.productList
+          : productList // ignore: cast_nullable_to_non_nullable
+              as List<ProductListResponseModel>,
+      cartItems: null == cartItems
+          ? _value.cartItems
+          : cartItems // ignore: cast_nullable_to_non_nullable
+              as List<ProductListResponseModel>,
     ) as $Val);
   }
 }
@@ -67,7 +91,11 @@ abstract class _$$HomeStateImplCopyWith<$Res>
       __$$HomeStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({CategoryEnum? selectedCatory});
+  $Res call(
+      {CategoryEnum? selectedCatory,
+      bool productListLoading,
+      List<ProductListResponseModel> productList,
+      List<ProductListResponseModel> cartItems});
 }
 
 /// @nodoc
@@ -84,12 +112,27 @@ class __$$HomeStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? selectedCatory = freezed,
+    Object? productListLoading = null,
+    Object? productList = null,
+    Object? cartItems = null,
   }) {
     return _then(_$HomeStateImpl(
       selectedCatory: freezed == selectedCatory
           ? _value.selectedCatory
           : selectedCatory // ignore: cast_nullable_to_non_nullable
               as CategoryEnum?,
+      productListLoading: null == productListLoading
+          ? _value.productListLoading
+          : productListLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      productList: null == productList
+          ? _value._productList
+          : productList // ignore: cast_nullable_to_non_nullable
+              as List<ProductListResponseModel>,
+      cartItems: null == cartItems
+          ? _value._cartItems
+          : cartItems // ignore: cast_nullable_to_non_nullable
+              as List<ProductListResponseModel>,
     ));
   }
 }
@@ -97,15 +140,41 @@ class __$$HomeStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$HomeStateImpl implements _HomeState {
-  const _$HomeStateImpl({this.selectedCatory = null});
+  const _$HomeStateImpl(
+      {this.selectedCatory = null,
+      this.productListLoading = false,
+      final List<ProductListResponseModel> productList = const [],
+      final List<ProductListResponseModel> cartItems = const []})
+      : _productList = productList,
+        _cartItems = cartItems;
 
   @override
   @JsonKey()
   final CategoryEnum? selectedCatory;
+  @override
+  @JsonKey()
+  final bool productListLoading;
+  final List<ProductListResponseModel> _productList;
+  @override
+  @JsonKey()
+  List<ProductListResponseModel> get productList {
+    if (_productList is EqualUnmodifiableListView) return _productList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_productList);
+  }
+
+  final List<ProductListResponseModel> _cartItems;
+  @override
+  @JsonKey()
+  List<ProductListResponseModel> get cartItems {
+    if (_cartItems is EqualUnmodifiableListView) return _cartItems;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_cartItems);
+  }
 
   @override
   String toString() {
-    return 'HomeState(selectedCatory: $selectedCatory)';
+    return 'HomeState(selectedCatory: $selectedCatory, productListLoading: $productListLoading, productList: $productList, cartItems: $cartItems)';
   }
 
   @override
@@ -114,11 +183,22 @@ class _$HomeStateImpl implements _HomeState {
         (other.runtimeType == runtimeType &&
             other is _$HomeStateImpl &&
             (identical(other.selectedCatory, selectedCatory) ||
-                other.selectedCatory == selectedCatory));
+                other.selectedCatory == selectedCatory) &&
+            (identical(other.productListLoading, productListLoading) ||
+                other.productListLoading == productListLoading) &&
+            const DeepCollectionEquality()
+                .equals(other._productList, _productList) &&
+            const DeepCollectionEquality()
+                .equals(other._cartItems, _cartItems));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, selectedCatory);
+  int get hashCode => Object.hash(
+      runtimeType,
+      selectedCatory,
+      productListLoading,
+      const DeepCollectionEquality().hash(_productList),
+      const DeepCollectionEquality().hash(_cartItems));
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
@@ -130,11 +210,20 @@ class _$HomeStateImpl implements _HomeState {
 }
 
 abstract class _HomeState implements HomeState {
-  const factory _HomeState({final CategoryEnum? selectedCatory}) =
-      _$HomeStateImpl;
+  const factory _HomeState(
+      {final CategoryEnum? selectedCatory,
+      final bool productListLoading,
+      final List<ProductListResponseModel> productList,
+      final List<ProductListResponseModel> cartItems}) = _$HomeStateImpl;
 
   @override
   CategoryEnum? get selectedCatory;
+  @override
+  bool get productListLoading;
+  @override
+  List<ProductListResponseModel> get productList;
+  @override
+  List<ProductListResponseModel> get cartItems;
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.

@@ -40,6 +40,7 @@ const _$CategoryEnumEnumMap = {
   CategoryEnum.womensClothing: 'womensClothing',
   CategoryEnum.jewelery: 'jewelery',
   CategoryEnum.electronics: 'electronics',
+  CategoryEnum.cart: 'cart',
 };
 
 _$RatingImpl _$$RatingImplFromJson(Map<String, dynamic> json) => _$RatingImpl(
