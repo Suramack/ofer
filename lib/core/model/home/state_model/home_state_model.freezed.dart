@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$HomeState {
   CategoryEnum? get selectedCatory => throw _privateConstructorUsedError;
   bool get productListLoading => throw _privateConstructorUsedError;
+  double get sideBarWidth => throw _privateConstructorUsedError;
   List<ProductListResponseModel> get productList =>
       throw _privateConstructorUsedError;
   List<ProductListResponseModel> get cartItems =>
@@ -38,6 +39,7 @@ abstract class $HomeStateCopyWith<$Res> {
   $Res call(
       {CategoryEnum? selectedCatory,
       bool productListLoading,
+      double sideBarWidth,
       List<ProductListResponseModel> productList,
       List<ProductListResponseModel> cartItems});
 }
@@ -59,6 +61,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
   $Res call({
     Object? selectedCatory = freezed,
     Object? productListLoading = null,
+    Object? sideBarWidth = null,
     Object? productList = null,
     Object? cartItems = null,
   }) {
@@ -71,6 +74,10 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
           ? _value.productListLoading
           : productListLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      sideBarWidth: null == sideBarWidth
+          ? _value.sideBarWidth
+          : sideBarWidth // ignore: cast_nullable_to_non_nullable
+              as double,
       productList: null == productList
           ? _value.productList
           : productList // ignore: cast_nullable_to_non_nullable
@@ -94,6 +101,7 @@ abstract class _$$HomeStateImplCopyWith<$Res>
   $Res call(
       {CategoryEnum? selectedCatory,
       bool productListLoading,
+      double sideBarWidth,
       List<ProductListResponseModel> productList,
       List<ProductListResponseModel> cartItems});
 }
@@ -113,6 +121,7 @@ class __$$HomeStateImplCopyWithImpl<$Res>
   $Res call({
     Object? selectedCatory = freezed,
     Object? productListLoading = null,
+    Object? sideBarWidth = null,
     Object? productList = null,
     Object? cartItems = null,
   }) {
@@ -125,6 +134,10 @@ class __$$HomeStateImplCopyWithImpl<$Res>
           ? _value.productListLoading
           : productListLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      sideBarWidth: null == sideBarWidth
+          ? _value.sideBarWidth
+          : sideBarWidth // ignore: cast_nullable_to_non_nullable
+              as double,
       productList: null == productList
           ? _value._productList
           : productList // ignore: cast_nullable_to_non_nullable
@@ -143,6 +156,7 @@ class _$HomeStateImpl implements _HomeState {
   const _$HomeStateImpl(
       {this.selectedCatory = null,
       this.productListLoading = false,
+      this.sideBarWidth = 10.0,
       final List<ProductListResponseModel> productList = const [],
       final List<ProductListResponseModel> cartItems = const []})
       : _productList = productList,
@@ -154,6 +168,9 @@ class _$HomeStateImpl implements _HomeState {
   @override
   @JsonKey()
   final bool productListLoading;
+  @override
+  @JsonKey()
+  final double sideBarWidth;
   final List<ProductListResponseModel> _productList;
   @override
   @JsonKey()
@@ -174,7 +191,7 @@ class _$HomeStateImpl implements _HomeState {
 
   @override
   String toString() {
-    return 'HomeState(selectedCatory: $selectedCatory, productListLoading: $productListLoading, productList: $productList, cartItems: $cartItems)';
+    return 'HomeState(selectedCatory: $selectedCatory, productListLoading: $productListLoading, sideBarWidth: $sideBarWidth, productList: $productList, cartItems: $cartItems)';
   }
 
   @override
@@ -186,6 +203,8 @@ class _$HomeStateImpl implements _HomeState {
                 other.selectedCatory == selectedCatory) &&
             (identical(other.productListLoading, productListLoading) ||
                 other.productListLoading == productListLoading) &&
+            (identical(other.sideBarWidth, sideBarWidth) ||
+                other.sideBarWidth == sideBarWidth) &&
             const DeepCollectionEquality()
                 .equals(other._productList, _productList) &&
             const DeepCollectionEquality()
@@ -197,6 +216,7 @@ class _$HomeStateImpl implements _HomeState {
       runtimeType,
       selectedCatory,
       productListLoading,
+      sideBarWidth,
       const DeepCollectionEquality().hash(_productList),
       const DeepCollectionEquality().hash(_cartItems));
 
@@ -213,6 +233,7 @@ abstract class _HomeState implements HomeState {
   const factory _HomeState(
       {final CategoryEnum? selectedCatory,
       final bool productListLoading,
+      final double sideBarWidth,
       final List<ProductListResponseModel> productList,
       final List<ProductListResponseModel> cartItems}) = _$HomeStateImpl;
 
@@ -220,6 +241,8 @@ abstract class _HomeState implements HomeState {
   CategoryEnum? get selectedCatory;
   @override
   bool get productListLoading;
+  @override
+  double get sideBarWidth;
   @override
   List<ProductListResponseModel> get productList;
   @override

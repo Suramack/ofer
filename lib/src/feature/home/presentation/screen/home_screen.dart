@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ofer/design_system/font/brand_font.dart';
 import 'package:ofer/design_system/label/label.dart';
 import 'package:ofer/design_system/loader/brand_loader.dart';
+import 'package:ofer/design_system/widget/brand_button.dart';
 import 'package:ofer/design_system/widget/brand_sized_box.dart';
 import 'package:ofer/src/feature/home/presentation/widget/product_card_widget.dart';
 import 'package:ofer/src/theme/colors.dart';
@@ -24,13 +26,32 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      fetchData();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await fetchData();
     });
   }
 
   Future<void> fetchData() async {
     await provider.getProductList();
+    updateSideBarWidth();
+  }
+
+  Future<void> updateSideBarWidth() async {
+    Future.delayed(const Duration(milliseconds: 750), () {
+      provider.updateSideBarWidth();
+    });
+  }
+
+  void showSnackBar() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Center(child: BrandText(data: Strings.added)),
+        width: 100,
+        behavior: SnackBarBehavior.floating,
+        duration: Duration(milliseconds: 300),
+        backgroundColor: AppColor.secondary,
+      ),
+    );
   }
 
   @override
@@ -48,7 +69,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   AnimatedContainer(
                     color: AppColor.primary,
                     height: MediaQuery.sizeOf(context).height,
-                    width: 75,
+                    width: provider.sideBarWidth,
                     duration: const Duration(milliseconds: 350),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -119,36 +140,77 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         BrandText.primary(
                           data:
                               provider.selectedCatory?.display ?? Strings.ofer,
+                          fontSize: BrandFontSize.body,
                         ),
+                        if (provider.getSelectedProductList().isEmpty)
+                          BrandText.grey(
+                            data: Strings.pleaseSelectAnyCat,
+                            fontSize: BrandFontSize.body,
+                          ),
                         if (provider.getSelectedProductList().isNotEmpty)
                           Expanded(
-                            child: ListView.builder(
-                              itemCount:
-                                  provider.getSelectedProductList().length,
-                              itemBuilder: (context, index) =>
-                                  ProductCardWidget(
-                                enableAddToCart: provider.selectedCatory !=
-                                    CategoryEnum.cart,
-                                title: provider
-                                    .getSelectedProductList()[index]
-                                    .title,
-                                image: provider
-                                    .getSelectedProductList()[index]
-                                    .image,
-                                price: provider
-                                    .getSelectedProductList()[index]
-                                    .price
-                                    ?.toString(),
-                                rating: provider
-                                    .getSelectedProductList()[index]
-                                    .rating
-                                    ?.rate
-                                    ?.toString(),
-                                addToCart: () {
-                                  provider.updateCart(
-                                      provider.getSelectedProductList()[index]);
-                                },
-                              ),
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  child: ListView.builder(
+                                    itemCount: provider
+                                        .getSelectedProductList()
+                                        .length,
+                                    itemBuilder: (context, index) =>
+                                        ProductCardWidget(
+                                      enableAddToCart:
+                                          provider.selectedCatory !=
+                                              CategoryEnum.cart,
+                                      title: provider
+                                          .getSelectedProductList()[index]
+                                          .title,
+                                      image: provider
+                                          .getSelectedProductList()[index]
+                                          .image,
+                                      price: provider
+                                          .getSelectedProductList()[index]
+                                          .price
+                                          ?.toString(),
+                                      rating: provider
+                                          .getSelectedProductList()[index]
+                                          .rating
+                                          ?.rate
+                                          ?.toString(),
+                                      addToCart: () {
+                                        provider.updateCart(provider
+                                            .getSelectedProductList()[index]);
+                                        showSnackBar();
+                                      },
+                                    ),
+                                  ),
+                                ),
+                                if (provider.showTotalPrice)
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 16,
+                                        top: 16,
+                                        right: 16,
+                                        bottom: 26),
+                                    child: Row(
+                                      children: [
+                                        BrandText.primary(
+                                          data:
+                                              '\$${provider.totalPrice.toString()}',
+                                          fontSize: BrandFontSize.body,
+                                        ),
+                                        Spacer(),
+                                        SizedBox(
+                                          width: 100,
+                                          child: BrandButton.primary(
+                                            bgColor: AppColor.secondary,
+                                            onTap: () {},
+                                            title: Strings.orderNow,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                              ],
                             ),
                           )
                       ],

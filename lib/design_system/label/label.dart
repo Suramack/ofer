@@ -30,4 +30,10 @@ abstract class Strings {
   static const continueS = 'Continue';
 
   static const search = 'Search';
+
+  static const added = 'Added';
+
+  static const orderNow = 'Order Now';
+
+  static const pleaseSelectAnyCat = 'Please select any category';
 }

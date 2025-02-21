@@ -9,6 +9,7 @@ class HomeState with _$HomeState {
   const factory HomeState({
     @Default(null) CategoryEnum? selectedCatory,
     @Default(false) bool productListLoading,
+    @Default(25.0) double sideBarWidth,
     @Default([]) List<ProductListResponseModel> productList,
     @Default([]) List<ProductListResponseModel> cartItems,
   }) = _HomeState;

@@ -20,6 +20,10 @@ class HomeNotifierProvider extends StateNotifier<HomeState> {
 
   List<ProductListResponseModel> get cartItems => state.cartItems;
 
+  double get sideBarWidth => state.sideBarWidth;
+
+  double totalPrice = 0.0;
+
   List<CategoryIcons> categoryIcons = const [
     CategoryIcons(
         categoryEnum: CategoryEnum.womensClothing, icon: Icons.woman_2_rounded),
@@ -32,6 +36,9 @@ class HomeNotifierProvider extends StateNotifier<HomeState> {
     CategoryIcons(
         categoryEnum: CategoryEnum.cart, icon: Icons.shopping_bag_outlined),
   ];
+
+  bool get showTotalPrice =>
+      selectedCatory == CategoryEnum.cart && cartItems.isNotEmpty;
 
   Future<void> getProductList() async {
     state = state.copyWith(productListLoading: true);
@@ -108,6 +115,14 @@ class HomeNotifierProvider extends StateNotifier<HomeState> {
 
     list.add(tempModel);
 
+    for (var i in list) {
+      totalPrice += (i.price ?? 0).ceilToDouble();
+    }
+
     state = state.copyWith(cartItems: list);
+  }
+
+  void updateSideBarWidth() {
+    state = state.copyWith(sideBarWidth: 75);
   }
 }
